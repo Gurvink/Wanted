@@ -1,33 +1,37 @@
-name: Deploy Flame Game to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
+  workflow_dispatch:
   push:
     branches:
-      - main  # Start bij elke push naar main
+      - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  deploy:
+    runs-on: ubuntu-18.04
     steps:
-      - name: 🔄 Haal de repository op
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
-      - name: 🛠️ Installeer Flutter
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v1
         with:
           flutter-version: '3.29.0'
-          channel: stable
+          channel: 'beta' # Required for web
 
-      - name: 📦 Installeer dependencies
+      - name: Enable Flutter Web
+        run: flutter config --enable-web
+
+      - name: Download Dependencies
         run: flutter pub get
 
-      - name: 🚀 Build Flutter Web
-        run: flutter build web --release --base-href "/Wanted/"
+      - name: Build
+        run: flutter build web
 
-      - name: 📤 Deploy naar GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages
-          folder: build/web
-          clean: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
+          force_orphan: true
+          user_name: 'github-ci[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Publish to gh-pages'
