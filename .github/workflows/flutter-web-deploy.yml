@@ -1,0 +1,32 @@
+name: Deploy Flame Game to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Start bij elke push naar main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔄 Haal de repository op
+        uses: actions/checkout@v3
+
+      - name: 🛠️ Installeer Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: 📦 Installeer dependencies
+        run: flutter pub get
+
+      - name: 🚀 Build Flutter Web
+        run: flutter build web --release
+
+      - name: 📤 Deploy naar GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build/web
+          clean: true
