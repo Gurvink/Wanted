@@ -31,7 +31,7 @@ jobs:
 
       - name: Commit and push
         run: |
-          git add build/web/
+          git add -f build/web/
           git commit -m "Deploy to gh-pages"
           git push --force origin gh-pages
 
