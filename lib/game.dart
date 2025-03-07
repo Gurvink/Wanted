@@ -69,6 +69,7 @@ class MainGame extends FlameGame {
     time = 30;
     NextRound();
     FlameAudio.bgm.play('wanted.mp3');
+    add(Hud());
   }
 
 
@@ -76,6 +77,7 @@ class MainGame extends FlameGame {
     FlameAudio.bgm.resume();
     round++;
     var target = Face(character: Faces.values.random());
+    target.size = Vector2.all(size.x / 18);
     target.isTarget = true;
     target.position = Vector2(
         Random().nextDouble() * (size.x),
@@ -88,12 +90,12 @@ class MainGame extends FlameGame {
         character = Faces.values.random();
       } while(character == target.character);
       var face = Face(character: character);
+      face.size = Vector2.all(size.x / 18);
       face.position = Vector2(
           Random().nextDouble() * (size.x),
           Random().nextDouble() * (size.y),
       );
       add(face);
-      add(Hud());
     }
     active = true;
   }

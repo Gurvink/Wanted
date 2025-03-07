@@ -20,7 +20,7 @@ class Face extends SpriteComponent with HasGameReference<MainGame>, TapCallbacks
   @override
   Future<void> onLoad() async{
     super.onLoad();
-    velocity = Vector2(Random().nextDouble()*10-10, Random().nextDouble()*10-10);
+    velocity = Vector2(Random().nextDouble()*2-1, Random().nextDouble()*2-1)*10;
     switch(character){
       case Faces.mario:
         faceImage = game.images.fromCache('mario.png');
@@ -52,11 +52,16 @@ class Face extends SpriteComponent with HasGameReference<MainGame>, TapCallbacks
 
   @override
   void update(double dt){
-    if(position.x < 0 || position.x > game.size.x){
-      velocity.x = -velocity.x;
+    if(position.x < 0 - size.x){
+      position.x = game.size.x + size.x;
+    } else if (position.x > game.size.x + size.x){
+      position.x = 0 - size.x;
     }
-    if(position.y < 0 || position.y > game.size.y){
-      velocity.y = -velocity.y;
+
+    if(position.y < 0 - size.y){
+      position.y = game.size.y + size.y;
+    } else if (position.y > game.size.y + size.y){
+      position.y = 0 - size.y;
     }
     position += velocity * speed * dt;
     super.update(dt);
