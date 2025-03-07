@@ -31,10 +31,11 @@ jobs:
 
       - name: Commit and push
         run: |
-          git fetch origin gh-pages
+          git checkout gh-pages
+          git checkout main
           git add -f build/web/
           git commit -m "Deploy to gh-pages"
-          git push origin gh-pages
+          git push origin gh-pages --force
 
 
 
