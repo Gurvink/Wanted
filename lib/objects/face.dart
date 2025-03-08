@@ -19,8 +19,11 @@ class Face extends SpriteComponent with HasGameReference<MainGame>, TapCallbacks
 
   @override
   Future<void> onLoad() async{
-    super.onLoad();
-    velocity = Vector2(Random().nextDouble()*2-1, Random().nextDouble()*2-1)*10;
+    if(game.size.x > game.size.y){
+      size = Vector2.all(game.size.x / 18);
+    } else {
+      size = Vector2.all(game.size.y / 18);
+    }
     switch(character){
       case Faces.mario:
         faceImage = game.images.fromCache('mario.png');
@@ -36,6 +39,7 @@ class Face extends SpriteComponent with HasGameReference<MainGame>, TapCallbacks
         break;
     }
     sprite = Sprite(faceImage);
+    super.onLoad();
   }
 
   @override
