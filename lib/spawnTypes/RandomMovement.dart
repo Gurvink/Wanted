@@ -20,7 +20,7 @@ class RandomMovement extends Spawner{
       do{
         character = Faces.values.random();
       } while(character == target.character);
-      var face = Face(character: character);
+      var face = Face(character: character, game: game);
       face.position = Vector2(
         Random().nextDouble() * (game.size.x - face.size.x) + face.size.x,
         Random().nextDouble() * (game.size.y - face.size.y) + face.size.y,

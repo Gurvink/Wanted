@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flame/components.dart';
@@ -6,23 +7,23 @@ import '../game.dart';
 
 enum Faces {mario, luigi, wario, yoshi}
 
-class Face extends SpriteComponent with HasGameReference<MainGame>, TapCallbacks{
+class Face extends SpriteComponent with TapCallbacks{
   final Faces character;
   late Image faceImage;
-
   Vector2 velocity = Vector2.zero();
   final double speed = 20;
   bool isTarget = false;
+  MainGame game;
 
-  Face({required this.character}) : super(size: Vector2.all(64), anchor: Anchor.center);
+  Face({required this.character, required this.game}) : super(anchor: Anchor.center)
+  {
+    size = Vector2.all(
+        min(game.size.x  / sqrt(game.amountInScreen), game.size.y / sqrt(game.amountInScreen))
+    );
+  }
 
   @override
   Future<void> onLoad() async{
-    if(game.size.x > game.size.y){
-      size = Vector2.all(game.size.x / 18);
-    } else {
-      size = Vector2.all(game.size.y / 18);
-    }
     switch(character){
       case Faces.mario:
         faceImage = game.images.fromCache('mario.png');

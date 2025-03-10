@@ -15,6 +15,7 @@ class MainGame extends FlameGame {
   int time = 30;
   bool active = false;
   int round = 0;
+  int amountInScreen = 200;
   late Spawner spawner;
   final ValueNotifier<String> imageNotifier = ValueNotifier('luigi_wanted.png');
 
@@ -70,22 +71,23 @@ class MainGame extends FlameGame {
     time = 30;
     NextRound();
     FlameAudio.bgm.play('wanted.mp3');
+    FlameAudio.bgm.pause();
     add(Hud());
   }
 
 
   void NextRound() {
-    FlameAudio.bgm.resume();
     round++;
     var spawner = Spawner.randomClass();
     add(spawner);
-    var target = Face(character: Faces.values.random());
+    var target = Face(character: Faces.values.random(), game: this);
     changeImage(target.character);
     overlays.add("WantedPoster");
     async.Timer(Duration(seconds: 3), (){
       overlays.remove("WantedPoster");
       spawner.spawnFaces(faceAmount, target);
       active = true;
+      FlameAudio.bgm.resume();
     });
   }
 
