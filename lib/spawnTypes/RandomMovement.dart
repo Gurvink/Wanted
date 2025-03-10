@@ -7,11 +7,11 @@ import '../objects/face.dart';
 
 class RandomMovement extends Spawner{
   @override
-  Face spawnFaces(int faceAmount, Face target) {
+  void spawnFaces(int faceAmount, Face target) {
     target.isTarget = true;
     target.position = Vector2(
-      Random().nextDouble() * (game.size.x),
-      Random().nextDouble() * (game.size.y),
+      Random().nextDouble() * (game.size.x - target.size.x) + target.size.x,
+      Random().nextDouble() * (game.size.y - target.size.y) + target.size.y,
     );
     target.velocity = Vector2(Random().nextDouble()*2-1, Random().nextDouble()*2-1)*10;
     game.add(target);
@@ -22,13 +22,12 @@ class RandomMovement extends Spawner{
       } while(character == target.character);
       var face = Face(character: character);
       face.position = Vector2(
-        Random().nextDouble() * (game.size.x),
-        Random().nextDouble() * (game.size.y),
+        Random().nextDouble() * (game.size.x - face.size.x) + face.size.x,
+        Random().nextDouble() * (game.size.y - face.size.y) + face.size.y,
       );
       face.velocity = Vector2(Random().nextDouble()*2-1, Random().nextDouble()*2-1)*10;
       game.add(face);
     }
-    return target;
   }
 
 }

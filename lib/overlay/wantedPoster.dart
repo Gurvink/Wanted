@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wanted/game.dart';
-import 'package:wanted/objects/face.dart';
 
 class WantedPoster extends StatefulWidget{
   final ValueNotifier<String> imageNotifier;

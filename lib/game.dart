@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'dart:math';
 import 'dart:async' as async;
 
 import 'package:flame/components.dart';
@@ -9,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:wanted/objects/face.dart';
 import 'package:wanted/overlay/Hud.dart';
 import 'package:flame_audio/flame_audio.dart';
-import 'package:wanted/spawnTypes/noMovementRandom.dart';
 import 'package:wanted/spawnTypes/spawner.dart';
 
 class MainGame extends FlameGame {

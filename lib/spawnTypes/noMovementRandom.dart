@@ -6,11 +6,11 @@ import 'package:wanted/spawnTypes/spawner.dart';
 
 class NoMovementRandom extends Spawner{
   @override
-  Face spawnFaces(int faceAmount, Face target) {
+  void spawnFaces(int faceAmount, Face target) {
     target.isTarget = true;
     target.position = Vector2(
-      Random().nextDouble() * (game.size.x - 20) + 20,
-      Random().nextDouble() * (game.size.y - 20) + 20,
+      Random().nextDouble() * (game.size.x - target.size.x) + target.size.x,
+      Random().nextDouble() * (game.size.y - target.size.y) + target.size.y,
     );
     for(int i = 0; i < faceAmount; i++) {
       var character = target.character;
@@ -19,12 +19,11 @@ class NoMovementRandom extends Spawner{
       } while(character == target.character);
       var face = Face(character: character);
       face.position = Vector2(
-        Random().nextDouble() * (game.size.x - 20) + 20,
-        Random().nextDouble() * (game.size.y - 20) + 20,
+        Random().nextDouble() * (game.size.x - face.size.x) + face.size.x,
+        Random().nextDouble() * (game.size.y - face.size.y) + face.size.y,
       );
       game.add(face);
     }
     game.add(target);
-    return target;
   }
 }

@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flame/components.dart';
@@ -70,5 +69,4 @@ class Face extends SpriteComponent with HasGameReference<MainGame>, TapCallbacks
     position += velocity * speed * dt;
     super.update(dt);
   }
-
 }
