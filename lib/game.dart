@@ -33,6 +33,10 @@ class MainGame extends FlameGame {
     ]);
     await FlameAudio.audioCache.loadAll([
       'wanted.mp3',
+      'luigi.mp3',
+      'mario.mp3',
+      'yoshi.mp3',
+      'wario.mp3'
     ]);
     FlameAudio.bgm.initialize();
     timer = Timer(

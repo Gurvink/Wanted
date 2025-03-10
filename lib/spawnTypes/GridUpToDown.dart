@@ -13,7 +13,7 @@ class GridUpToDown extends Spawner{
     int position = random.nextInt(FacesAmount + 1);
     int loopAmount = 0;
     Vector2 velocity = Vector2(0, 5);
-    for(double x = target.size.x; x <= game.size.x; x += target.size.x){
+    for(double x = target.size.x; x <= game.size.x - target.size.x; x += target.size.x){
       for(double y = 0; y <= game.size.y + target.size.y; y += target.size.y){
         if(loopAmount == position){
           target.position = Vector2(x, y);

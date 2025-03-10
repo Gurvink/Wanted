@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../game.dart';
@@ -10,12 +9,12 @@ class StartMenu extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87, // Donkere achtergrond
+      backgroundColor: Colors.black87,
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Colors.blueGrey[800], // Kleur van het vierkant
+            color: Colors.blueGrey[800],
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(

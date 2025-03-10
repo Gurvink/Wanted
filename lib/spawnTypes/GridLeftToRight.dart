@@ -13,7 +13,7 @@ class GridLeftToRight extends Spawner{
     int position = random.nextInt(FacesAmount + 1);
     int loopAmount = 0;
     Vector2 velocity = Vector2(5, 0);
-    for(double y = target.size.y; y <= game.size.y; y += target.size.y){
+    for(double y = target.size.y; y <= game.size.y - target.size.y; y += target.size.y){
       for(double x = 0; x <= game.size.x + target.size.x; x += target.size.x){
         if(loopAmount == position){
           target.position = Vector2(x, y);

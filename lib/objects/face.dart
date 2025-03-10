@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame_audio/flame_audio.dart';
 import '../game.dart';
 
 enum Faces {mario, luigi, wario, yoshi}
@@ -14,6 +15,7 @@ class Face extends SpriteComponent with TapCallbacks{
   final double speed = 20;
   bool isTarget = false;
   MainGame game;
+  late String sound;
 
   Face({required this.character, required this.game}) : super(anchor: Anchor.center)
   {
@@ -27,15 +29,19 @@ class Face extends SpriteComponent with TapCallbacks{
     switch(character){
       case Faces.mario:
         faceImage = game.images.fromCache('mario.png');
+        sound = "mario.mp3";
         break;
       case Faces.luigi:
         faceImage = game.images.fromCache('luigi.png');
+        sound = "luigi.mp3";
         break;
       case Faces.wario:
         faceImage = game.images.fromCache('wario.png');
+        sound = "wario.mp3";
         break;
       case Faces.yoshi:
         faceImage = game.images.fromCache('yoshi.png');
+        sound = "yoshi.mp3";
         break;
     }
     sprite = Sprite(faceImage);
@@ -47,6 +53,7 @@ class Face extends SpriteComponent with TapCallbacks{
     if(isTarget){
       velocity = Vector2.zero();
       game.time += 5;
+      FlameAudio.play(sound);
       game.gameWon();
     } else {
       game.time -= 3;
