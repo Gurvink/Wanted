@@ -17,7 +17,8 @@ class GridLeftToRight extends Spawner{
       for(double x = 0; x <= game.size.x + target.size.x; x += target.size.x){
         if(loopAmount == position){
           target.position = Vector2(x, y);
-          target.velocity = velocity;
+          target.velocity = velocity.clone();
+          target.checkCollision = target.moveToOtherSide;
           game.add(target);
         }  else {
           var character = target.character;
@@ -26,7 +27,7 @@ class GridLeftToRight extends Spawner{
           } while(character == target.character);
           Face face = Face(character: character, game: game);
           face.position = Vector2(x, y);
-          face.velocity = velocity;
+          face.velocity = velocity.clone();
           game.add(face);
         }
         loopAmount++;

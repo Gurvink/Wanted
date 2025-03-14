@@ -17,11 +17,14 @@ class Face extends SpriteComponent with TapCallbacks{
   MainGame game;
   late String sound;
 
+  late Function checkCollision;
+
   Face({required this.character, required this.game}) : super(anchor: Anchor.center)
   {
     size = Vector2.all(
         min(game.size.x  / sqrt(game.amountInScreen), game.size.y / sqrt(game.amountInScreen))
     );
+    checkCollision = moveToOtherSide;
   }
 
   @override
@@ -63,18 +66,34 @@ class Face extends SpriteComponent with TapCallbacks{
 
   @override
   void update(double dt){
+    checkCollision();
+    position += velocity * speed * dt;
+    super.update(dt);
+  }
+
+  void moveToOtherSide(){
     if(position.x < 0 - size.x){
       position.x = game.size.x + size.x;
-    } else if (position.x > game.size.x + size.x){
+    } else if (position.x > game.size.x + size.x) {
       position.x = 0 - size.x;
     }
-
     if(position.y < 0 - size.y){
       position.y = game.size.y + size.y;
     } else if (position.y > game.size.y + size.y){
       position.y = 0 - size.y;
     }
-    position += velocity * speed * dt;
-    super.update(dt);
+  }
+
+  void bounceOnWalls(){
+    if(position.x < 0){
+      velocity.x = -velocity.x;
+    } else if (position.x > game.size.x) {
+      velocity.x = -velocity.x;
+    }
+    if(position.y < 0){
+      velocity.y = -velocity.y;
+    } else if (position.y > game.size.y){
+      velocity.y = -velocity.y;
+    }
   }
 }

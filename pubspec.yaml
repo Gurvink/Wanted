@@ -37,6 +37,12 @@ dependencies:
   flame: ^1.25.0
   flame_audio: ^2.11.0
   shared_preferences: ^2.5.2
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  image_path: "assets/images/mario.png"
+  android: true
+  ios: true
 
 dev_dependencies:
   flutter_test:

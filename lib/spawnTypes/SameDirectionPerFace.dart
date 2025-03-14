@@ -33,13 +33,13 @@ class SameDirectionPerFace extends Spawner {
       );
       switch(face.character) {
         case Faces.mario:
-          face.velocity = velocities[0];
+          face.velocity = velocities[0].clone();
         case Faces.luigi:
-          face.velocity = velocities[1];
+          face.velocity = velocities[1].clone();
         case Faces.wario:
-          face.velocity = velocities[2];
+          face.velocity = velocities[2].clone();
         case Faces.yoshi:
-          face.velocity = velocities[3];
+          face.velocity = velocities[3].clone();
       }
       game.add(face);
     }
